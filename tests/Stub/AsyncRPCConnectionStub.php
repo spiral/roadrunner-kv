@@ -30,7 +30,7 @@ class AsyncRPCConnectionStub extends RPCConnectionStub implements AsyncRPCInterf
         return isset($this->responses[$seq]);
     }
 
-    public function hasAnyResponse(array $seqs): array
+    public function hasResponses(array $seqs): array
     {
         return array_filter($seqs, $this->hasResponse(...));
     }
@@ -42,5 +42,10 @@ class AsyncRPCConnectionStub extends RPCConnectionStub implements AsyncRPCInterf
         }
 
         return $this->responses[$seq];
+    }
+
+    public function getResponses(array $seqs, mixed $options = null): iterable
+    {
+        return array_map(fn($seq) => $this->getResponse($seq, $options), $seqs);
     }
 }

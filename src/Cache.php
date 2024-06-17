@@ -26,7 +26,7 @@ class Cache implements StorageInterface
 {
     use SerializerAwareTrait;
 
-    private const ERROR_INVALID_STORAGE =
+    protected const ERROR_INVALID_STORAGE =
         'Storage "%s" has not been defined. Please make sure your '.
         'RoadRunner "kv" configuration contains a storage key named "%1$s"';
 
@@ -47,9 +47,9 @@ class Cache implements StorageInterface
      * @param non-empty-string $name
      */
     public function __construct(
-        RPCInterface $rpc,
-        private readonly string $name,
-        SerializerInterface $serializer = new DefaultSerializer()
+        RPCInterface              $rpc,
+        protected readonly string $name,
+        SerializerInterface       $serializer = new DefaultSerializer()
     ) {
         $this->rpc = $rpc->withCodec(new ProtobufCodec());
         $this->zone = new \DateTimeZone('UTC');
@@ -108,7 +108,7 @@ class Cache implements StorageInterface
     /**
      * @return array<string, Item>
      */
-    private function createIndex(Response $response): array
+    protected function createIndex(Response $response): array
     {
         $result = [];
 
@@ -146,7 +146,7 @@ class Cache implements StorageInterface
      * @param iterable<string> $keys
      * @throws InvalidArgumentException
      */
-    private function requestKeys(iterable $keys): Request
+    protected function requestKeys(iterable $keys): Request
     {
         $items = [];
 
@@ -257,8 +257,9 @@ class Cache implements StorageInterface
     /**
      * @param iterable<string, mixed> $values
      * @throws SerializationException
+     * @throws InvalidArgumentException
      */
-    private function requestValues(iterable $values, string $ttl): Request
+    protected function requestValues(iterable $values, string $ttl): Request
     {
         $items = [];
         $serializer = $this->getSerializer();
@@ -279,8 +280,9 @@ class Cache implements StorageInterface
 
     /**
      * @throws InvalidArgumentException
+     * @throws \Exception
      */
-    private function ttlToRfc3339String(null|int|\DateInterval $ttl): string
+    protected function ttlToRfc3339String(null|int|\DateInterval $ttl): string
     {
         if ($ttl === null) {
             return '';

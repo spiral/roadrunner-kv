@@ -47,9 +47,9 @@ class Cache implements StorageInterface
      * @param non-empty-string $name
      */
     public function __construct(
-        RPCInterface              $rpc,
+        RPCInterface $rpc,
         protected readonly string $name,
-        SerializerInterface       $serializer = new DefaultSerializer()
+        SerializerInterface $serializer = new DefaultSerializer()
     ) {
         $this->rpc = $rpc->withCodec(new ProtobufCodec());
         $this->zone = new \DateTimeZone('UTC');

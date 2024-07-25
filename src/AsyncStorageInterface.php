@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Spiral\RoadRunner\KeyValue;
 
-use DateInterval;
 use Spiral\RoadRunner\KeyValue\Exception\KeyValueException;
 
 interface AsyncStorageInterface extends StorageInterface
@@ -28,7 +29,7 @@ interface AsyncStorageInterface extends StorageInterface
      *   MUST be thrown if $values is neither an array nor a Traversable,
      *   or if any of the $values are not a legal value.
      */
-    public function setMultipleAsync(iterable $values, null|int|DateInterval $ttl = null): bool;
+    public function setMultipleAsync(iterable $values, null|int|\DateInterval $ttl = null): bool;
 
     /**
      * Persists data in the cache, uniquely referenced by a key with an optional expiration TTL time.
@@ -44,7 +45,7 @@ interface AsyncStorageInterface extends StorageInterface
      * @throws \Psr\SimpleCache\InvalidArgumentException
      *    MUST be thrown if the $key string is not a legal value.
      */
-    public function setAsync(string $key, mixed $value, null|int|DateInterval $ttl = null): bool;
+    public function setAsync(string $key, mixed $value, null|int|\DateInterval $ttl = null): bool;
 
     /**
      * Delete an item from the cache by its unique key.

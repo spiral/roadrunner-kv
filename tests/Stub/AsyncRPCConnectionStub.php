@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Spiral\RoadRunner\KeyValue\Tests\Stub;
 
 use Spiral\Goridge\RPC\AsyncRPCInterface;

@@ -12,7 +12,6 @@ abstract class TestCase extends BaseTestCase
 {
     /**
      * @param array<string, mixed> $mapping
-     * @return RPCConnectionStub
      */
     protected function rpc(array $mapping = []): RPCConnectionStub
     {
@@ -21,7 +20,6 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * @param array<string, mixed> $mapping
-     * @return AsyncRPCConnectionStub
      */
     protected function asyncRPC(array $mapping = []): AsyncRPCConnectionStub
     {

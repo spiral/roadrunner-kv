@@ -28,8 +28,8 @@ final class Factory implements FactoryInterface
     {
         if ($this->rpc instanceof AsyncRPCInterface) {
             return new AsyncCache($this->rpc, $name, $this->getSerializer());
-        } else {
-            return new Cache($this->rpc, $name, $this->getSerializer());
         }
+
+        return new Cache($this->rpc, $name, $this->getSerializer());
     }
 }
